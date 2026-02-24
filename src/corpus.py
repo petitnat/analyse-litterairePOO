@@ -15,3 +15,5 @@ class Corpus:
     def total_mots(self) -> int:
         return sum(texte.nombre_mots() for texte in self._textes)
     
+    def rechercher_mot(self, mot: str):
+        
