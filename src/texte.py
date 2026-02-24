@@ -1,3 +1,5 @@
+from collections import Counter
+
 class Texte :
     def __init__(self, titre: str, auteur: str, contenu: str, annee: int):
         self._titre = titre
@@ -15,7 +17,11 @@ class Texte :
     def nombre_mots(self) -> int:
         return len(self._contenu.split())
     def mots_uniques(self) -> set[str]:
-        self.mots_uniques = set[]
-        for mot in self._contenu.split :
+        self.mots_uniques = set[str]
+        for mot in self._contenu.split().lower() :
             if mot not in self.mots_uniques:
                 self.mots_uniques.add(mot)
+        return self.mots_uniques
+    def frequences(self) -> dict[str, int]:
+        frequence = Counter(self._contenu.lower())
+        return frequence
