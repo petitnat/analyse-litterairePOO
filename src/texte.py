@@ -1,7 +1,9 @@
+"""class Texte"""
 from collections import Counter
 
 
 class Texte :
+    """objet Texte"""
 
     def __init__(self, titre: str, auteur: str, contenu: str, annee: int):
         self._titre = titre
@@ -9,11 +11,12 @@ class Texte :
         self._contenu = contenu
         self._contenu_split = contenu.lower().replace("\n"," ").split(" ")
         self.annee = annee
-    
+
     @property
     def titre(self) -> str:
+        """appel titre"""
         return self._titre
-    
+
     @titre.setter
     def titre(self, nouveau: str) -> None:
         if not nouveau.strip():
@@ -21,20 +24,23 @@ class Texte :
         self._titre = nouveau.strip()
 
     def nombre_mots(self) -> int:
+        """compte mots"""
         return len(self._contenu_split)
-    
+
     def mots_uniques(self) -> set[str]:
+        """index mots uniques"""
         mots_uniques: set[str] = set()
         counter = Counter(self._contenu_split)
         for mot, occurences in counter.items():
             if occurences == 1:
                 mots_uniques.add(mot)
         return mots_uniques
-    
+
     def frequences(self) -> dict[str, int]:
+        """compteur fréquence"""
         frequence = Counter(self._contenu_split)
         return frequence
-    
+
 
 
 texte = Texte("Droit de la femme", "eMILE", """A LA REINE.
@@ -61,6 +67,6 @@ vois qu'on observe de près la foule de mutins soudoyée, & qu'elle est
 retenue par la crainte des loix, je vous dirai, Madame, ce que je ne
 vous aurois pas dit alors.
 """, 1200)
-    
+
 print(texte.mots_uniques())
 print(texte.frequences())
