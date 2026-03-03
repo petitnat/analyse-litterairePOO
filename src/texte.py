@@ -11,6 +11,12 @@ class Texte :
         self.contenu = contenu.lower().replace("\n"," ")
         self.annee = annee
 
+    def __str__ (self) -> str:
+        return f"{self.titre} ({self.auteur}, {self.annee})"
+
+    def __repr__(self) -> str:
+        return (f"Texte(titre = {self.titre})"
+                f"auteur = {self.auteur}, année = {self.annee}")
     @property
     def titre(self) -> str:
         """appel titre"""
@@ -69,3 +75,5 @@ vous aurois pas dit alors.
 
 print(texte.mots_uniques())
 print(texte.frequences())
+print(texte)
+print(repr(texte))

@@ -1,6 +1,7 @@
 """
 Corpus est un conteneur de texte
 """
+
 from texte import Texte
 
 class Corpus:
@@ -8,7 +9,7 @@ class Corpus:
 
     def __init__(self, name: str):
         self.name = name
-        self._textes = list[Texte]
+        self._textes : list[Texte] = []
 
     def ajouter_texte(self, texte: Texte) ->None:
         """ajoute un texte"""
