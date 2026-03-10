@@ -1,6 +1,6 @@
 "" 
 from abc import ABC, abstractmethod
-
+from collections import Counter
 from texte import Texte
 
 class AnalyseurTexte(ABC):
@@ -18,7 +18,10 @@ class CompteurMots(AnalyseurTexte):
         mots = texte.resume().lower().split()
         return {"total": len(mots), "uniques": len(set(mots))}
 
+class AnalyseurFrequence(AnalyseurTexte):
 
+    def analyser(self, texte: "Texte"):
+        return (texte.frequences().most_common(10))
 
 if __name__ == "__main__":
 
@@ -50,4 +53,6 @@ if __name__ == "__main__":
     """, 1200)
 
     cm = CompteurMots()
-    print(cm.analyser(texte=texte1))
+    print(cm.analyser(texte1))
+    dixplus = AnalyseurFrequence()
+    print(dixplus.analyser(texte1))
