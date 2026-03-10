@@ -23,6 +23,19 @@ class AnalyseurFrequence(AnalyseurTexte):
     def analyser(self, texte: "Texte"):
         return (texte.frequences().most_common(10))
 
+class AnalyseurLongueur(AnalyseurTexte):
+    """analyseur de longueur"""
+    def analyser(self, texte: "Texte") -> dict:
+        return f"""nombre de mots : {texte.nombre_mots()}, nombre de phrases : {texte.nombre_phrases()}, """
+    def analyser_corpus(self, docs: list["Texte"]) -> list[dict]:
+        """analyseur de corpus"""
+        effectif = 0
+        result =""
+        for d in docs :
+            effectif += d.nombre_phrases()
+            result += self.analyser(d) +"\n"
+        return f"{result}moyenne de phrases : {effectif/len(docs)}"
+
 if __name__ == "__main__":
 
 
@@ -56,3 +69,5 @@ if __name__ == "__main__":
     print(cm.analyser(texte1))
     dixplus = AnalyseurFrequence()
     print(dixplus.analyser(texte1))
+    stats = AnalyseurLongueur()
+    print(stats.analyser(texte1))

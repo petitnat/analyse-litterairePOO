@@ -53,6 +53,10 @@ class Texte :
                 mots_uniques.add(mot)
         return mots_uniques
 
+    def nombre_phrases(self) -> int:
+        """compte phrases"""
+        return len(self.contenu.lower().replace("\n", " ").split("."))
+
     def frequences(self) -> dict[str, int]:
         """compteur fréquence"""
         frequence = Counter(self.contenu.lower().replace("\n"," ").split())
