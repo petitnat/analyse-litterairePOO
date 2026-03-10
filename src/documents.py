@@ -21,10 +21,11 @@ class Poesie(Texte) :
 
 class Article(Texte) :
     def __init__(self, titre: str, auteur: str, contenu: str, annee: int, revue : str) -> None:
-        super().init(titre, auteur, contenu, annee)
+        super().__init__(titre, auteur, contenu, annee)
         self.revue = revue
 
-    def 
+    def resume (self) -> str:
+        print (f"{self.titre}, {self.revue}")
 
 petitpoeme = Poesie("Le bateau ivre", "Arthur Rimbaud", "Comme je descendais des Fleuves impassibles,"
                                                          "Je ne me sentis plus guidé par les haleurs :"
@@ -43,6 +44,7 @@ petitpoeme = Poesie("Le bateau ivre", "Arthur Rimbaud", "Comme je descendais des
                                                          "Qu’on appelle rouleurs éternels de victimes,"
                                                          "Dix nuits, sans regretter l’oeil niais des falots !", 1898, "sonnet")
 
-
+petiterevue = Article("Attention aux vélos !", "Antonin Vachard", "Il semblerai que les vélos soient cancérigènes...", 2014, "Le petit coin du chasseur")
 
 print (petitpoeme.resume())
+print (petiterevue.resume())
