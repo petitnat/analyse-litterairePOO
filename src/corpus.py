@@ -3,6 +3,8 @@ Corpus est un conteneur de texte
 """
 from collections.abc import Iterator
 from texte import Texte
+from exportateur import ExportateurHTML, Exportateur
+
 
 class Corpus:
     """conteneur de classe"""
@@ -10,6 +12,7 @@ class Corpus:
     def __init__(self, name: str):
         self.name = name
         self._textes : list[Texte] = []
+
 
     def __len__(self):
         return len(self._textes)
@@ -46,6 +49,12 @@ class Corpus:
         for texte in self._textes :
             if mot_lower in texte.contenu.split():
                 print(texte.titre)
+
+    def export (self, exportateur: Exportateur) -> list[str]:
+        results = []
+        for texte in self._textes :
+            results.append(exportateur.exporter(texte))
+        return results
 
 
 if __name__ == "__main__":
@@ -95,3 +104,6 @@ if __name__ == "__main__":
     tout = roman + poesie
     print(len(tout))
     print(tout.name)
+
+    expthtml = ExportateurHTML()
+    print(roman.exporter(expthtml))

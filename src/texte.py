@@ -69,8 +69,15 @@ class Texte :
         return result
 
 
-
-
+class DocumentComplet (Texte) :
+    """ fait tout : analyse, export, stockage"""
+    def analyser (self): return self.frequence()
+    def exporter_html(self) :
+        return f"<h1>{self.titre}<h1><p>{self.contenu}<p>"
+    def exporter_csv(self):
+        return "\n".join(f"{m},{c}" for m,c in self.frequences().items())
+    def sauvegarder(self, chemin):
+        with open(chemin, "w") as f: f.write(self.contenu)
 
 
 if __name__ == "__main__":
