@@ -2,12 +2,17 @@
 from collections import Counter
 import re
 
+from exceptions import TexteVideError
+
+
 class Texte :
     """objet Texte"""
 
     def __init__(self, titre: str, auteur: str, contenu: str, annee: int):
         self._titre = titre
         self.auteur = auteur
+        if not contenu:
+            raise TexteVideError(titre)
         self.contenu = contenu
         self.mots = re.sub(r"\s+"," ",self.contenu).split()
         self.annee = annee
@@ -82,11 +87,13 @@ class DocumentComplet (Texte) :
 
 if __name__ == "__main__":
 
+    textevide = Texte("bonjour","","", 1945)
 
+    texte2 = Texte("asdfghjklllllll","Maurice Chevalier", "rien.", 0)
 
-    texte1 = Texte("Droit de la femme", "eMILE", """A LA REINE.
+    texte1 = Texte("Droit de la femme", "eMILE", """
 
-
+    
     MADAME,
 
     Peu faite au langage que l'on tient aux Rois, je n'emploierai point
@@ -108,8 +115,6 @@ if __name__ == "__main__":
     retenue par la crainte des loix, je vous dirai, Madame, ce que je ne
     vous aurois pas dit alors.
     """, 1200)
-    texte2 = Texte("asdfghjklllllll","Maurice Chevalier", "rien.", 0)
-
     liste = [texte1, texte2]
     for l in sorted(liste):
         print(l)
