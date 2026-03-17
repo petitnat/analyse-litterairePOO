@@ -2,8 +2,10 @@
 Corpus est un conteneur de texte
 """
 from collections.abc import Iterator
+
+from exceptions import FormatInconnuError
 from texte import Texte
-from exportateur import ExportateurHTML, Exportateur
+from exportateur import ExportateurHTML, Exportateur, ExportateurCSV
 
 
 class Corpus:
@@ -12,6 +14,10 @@ class Corpus:
     def __init__(self, name: str):
         self.name = name
         self._textes : list[Texte] = []
+        self.exportsteurs = {
+            "html": ExportateurHTML(),
+            "csv": ExportateurCSV()
+        }
 
 
     def __len__(self):
@@ -50,7 +56,12 @@ class Corpus:
             if mot_lower in texte.contenu.split():
                 print(texte.titre)
 
-    def export (self, exportateur: Exportateur) -> list[str]:
+    def export (self, type_exportateur: str) -> list[str]:
+        try:
+            exportateur = self.exportsteurs[type_exportateur]
+        except KeyError as e:
+            raise FormatInconnuError
+
         results = []
         for texte in self._textes :
             results.append(exportateur.exporter(texte))
