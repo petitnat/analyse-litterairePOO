@@ -2,7 +2,6 @@
 Corpus est un conteneur de texte
 """
 from collections.abc import Iterator
-
 from exceptions import FormatInconnuError
 from texte import Texte
 from exportateur import ExportateurHTML, Exportateur, ExportateurCSV
@@ -49,7 +48,7 @@ class Corpus:
         """renvoi nombre mots"""
         return sum(texte.nombre_mots() for texte in self._textes)
 
-    def rechercher_mot(self, mot: str):
+    def rechercher_mot(self, mot: str) ->str:
         """recherche mot dans texte du corpus"""
         mot_lower = mot.lower()
         for texte in self._textes :
@@ -117,4 +116,4 @@ if __name__ == "__main__":
     print(tout.name)
 
     expthtml = ExportateurHTML()
-    print(roman.exporter(expthtml))
+    print(roman.export(expthtml))
